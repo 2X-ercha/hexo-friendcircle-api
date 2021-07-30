@@ -14,8 +14,7 @@ def getdata():
     list = ['title','time','updated','link','author','headimg']
     list_user = ['frindname','friendlink','firendimg','error']
     # Verify key
-    leancloud.init("9IXXGBgDfpll1oh3mX6ktaM9-MdYXbMMI", "r5FYd3er2o0YTFPxdeeXPOdH")
-    # leancloud.init(os.environ["LEANCLOUD_ID"], os.environ["LEANCLOUD_KEY"])
+    leancloud.init(os.environ["LEANCLOUD_ID"], os.environ["LEANCLOUD_KEY"])
 
     # Declare class
     Friendspoor = leancloud.Object.extend('friend_poor')
@@ -66,9 +65,6 @@ def getdata():
         acticle_data.append(itemlist)
     api_json['acticle_data'] = acticle_data
     
-    with open("api.json", "w", encoding="utf-8") as api:
-        api.write(json.dumps(api_json, indent=2, separators=(',', ':'), ensure_ascii=False))
-
     return api_json
     # Api handler
 
@@ -79,6 +75,6 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'application/json')
         self.end_headers()
-        self.wfile.write(json.dumps(data).encode('utf-8'))
+        self.wfile.write(json.dumps(data, ensure_ascii=False))
         return
 print(getdata())
