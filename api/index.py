@@ -64,9 +64,12 @@ def getdata():
             itemlist[elem] = item.get(elem)
         acticle_data.append(itemlist)
     api_json['acticle_data'] = acticle_data
-
-    print(json.dumps(api_json, ensure_ascii=False))
     
+    """
+    with open("api.json", "w", encoding="utf-8") as api:
+        api.write(json.dumps(api_json, ensure_ascii=False))
+    """
+
     return api_json
     # Api handler
 
@@ -77,6 +80,6 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'application/json')
         self.end_headers()
-        self.wfile.write(json.dumps(data, ensure_ascii=False))
+        self.wfile.write(json.dumps(data, ensure_ascii=False).encode())
         return
 print(getdata())
