@@ -64,6 +64,8 @@ def getdata():
             itemlist[elem] = item.get(elem)
         acticle_data.append(itemlist)
     api_json['acticle_data'] = acticle_data
+
+    print(json.dumps(api_json, ensure_ascii=False))
     
     return api_json
     # Api handler
