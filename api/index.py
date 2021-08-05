@@ -12,7 +12,6 @@ from leancloud import user
 
 def getdata():
     list = ['title','time','updated','link','author','headimg']
-    list_user = ['frindname','friendlink','firendimg','error']
     # Verify key
     leancloud.init(os.environ["LEANCLOUD_ID"], os.environ["LEANCLOUD_KEY"])
 
@@ -57,21 +56,15 @@ def getdata():
         'last_updated_time': last_updated_time
     }
     
-    acticle_data = []
+    article_data = []
     for item in query_list:
         itemlist = {}
         for elem in list:
             itemlist[elem] = item.get(elem)
-        acticle_data.append(itemlist)
-    api_json['acticle_data'] = acticle_data
-    
-    """
-    with open("api.json", "w", encoding="utf-8") as api:
-        api.write(json.dumps(api_json, ensure_ascii=False))
-    """
+        article_data.append(itemlist)
+    api_json['article_data'] = article_data
 
     return api_json
-    # Api handler
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -82,4 +75,3 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps(data, ensure_ascii=False).encode())
         return
-print(getdata())
