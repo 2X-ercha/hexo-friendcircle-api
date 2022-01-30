@@ -1,2 +1,3 @@
 # hexo-friendcircle-api
-一个3.0的api样板测试
+
+友链朋友圈3.0版本的api，由vercel自动创建，勿删
